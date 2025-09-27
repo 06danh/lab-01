@@ -166,11 +166,11 @@ visitors %>%
 _Perform the same calculation for the 2021 admissions data._
 
 ```{r Ex_h}
-#visitors %>% 
-#  ______(
-#    __________,
-#    __________
-#  )
+visitors %>% 
+  summarise(
+    mean_2021 = mean(n_2021),
+    med_2021 = median(n_2021)
+  )
 ```
 
 All values in the output are `NA`!
@@ -181,7 +181,7 @@ _What does `NA` stand for and why are you getting this as your answer to the pre
 
 **Write your answer here**
 
-
+# No amount due to error in dataset, untidy data. NAs in data cannot be used to calculate mean or median as not dbl data type.
 
 
 ### Exercise j.
@@ -190,9 +190,13 @@ _Look at the help pages for the `mean()` and `median()` commands to see what the
 
 **Write your answer here**
 
-
-
-
+```{r Ex_j}
+visitors %>%
+  summarise(
+    mean_2021 = mean(n_2021, na.rm = TRUE),
+    med_2021 = median(n_2021, na.rm = TRUE) 
+  )
+```
 ## Question 7
 
 _Which setting (inside, outside or mixed) has the largest mean visitor numbers in 2022?_
@@ -211,7 +215,7 @@ visitors %>%
 _Observe in question 6 that the mean statistics across all settings are much larger than the corresponding median statistics. Discuss in your group what this suggests about the data._
 
 **Write your answer here**
-
+Data set is weighted so that the highest values are significantly further from median then the low values, which raises the mean but does not affect the median compared to an even distribution
 
 
 
@@ -243,10 +247,10 @@ _How many tourist attractions are there in each of the 4 nations? From this, dis
 
 
 ```{r Ex_l}
-#________ %>%
-#  ______(_______)
+visitors_with_nations %>%
+  count(nation)
 ```
-
+IQR  most reliable for England because it has highest number of attractions (240). Fairly reliable for Scotland as number of attractions is 97, unreliable for Northern Ireland or Wales because number of attractions is too low.
 
 
 # Challenging Exercises
